@@ -29,6 +29,17 @@ feature 'restaurants' do
 		expect(page).to have_content 'KFC'
 		expect(current_path).to eq '/restaurants'
 		end
+
+		context 'an invalid restaurant' do
+			it 'does not let you submit an incompleted form' do
+				visit '/restaurants'
+				click_link 'Add a restaurant'
+		    fill_in 'Name', with: 'KFC'
+		    click_button 'Create Restaurant'
+		    expect(page).not_to have_content 'KFC'
+		    expect(page). to have_content 'error'
+			end
+		end
 	end
 
 	context 'viewing restaurants' do
@@ -61,6 +72,8 @@ feature 'restaurants' do
 			expect(page).to have_content "Restaurant deleted"
 		end
 	end
+
+
 
 
 
