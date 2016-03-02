@@ -34,10 +34,10 @@ feature 'restaurants' do
 			it 'does not let you submit an incompleted form' do
 				visit '/restaurants'
 				click_link 'Add a restaurant'
-		    fill_in 'Name', with: 'KFC'
+		    fill_in 'Name', with: 'KF'
 		    click_button 'Create Restaurant'
-		    expect(page).not_to have_content 'KFC'
-		    expect(page). to have_content 'error'
+		    expect(page).not_to have_content 'KF'
+		    expect(page).to have_content 'error'
 			end
 		end
 	end
