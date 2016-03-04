@@ -42,7 +42,21 @@ feature "User can sign in and out" do
       expect(current_path).not_to eq('/restaurants/new')
       expect(page).not_to have_link('Create Restaurant')
     end
-    
+
+  end
+
+  context 'when user has not created' do
+    it 'user can not delete/edit restaurants' do
+      visit ('/')
+      sign_up_and_in('vale@gmail.com')
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+      click_link('Sign out')
+      sign_up_and_in('makers@gmail.com')
+      expect(page).not_to have_link('Edit KFC')
+      expect(page).not_to have_link('Delete KFC')
+    end
   end
 
 end
