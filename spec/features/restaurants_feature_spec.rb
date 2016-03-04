@@ -23,6 +23,7 @@ feature 'restaurants' do
 	context 'creating restaurants' do
 		scenario 'prompts user to fill out a form, then displays the new restaurant' do
 		visit '/restaurants'
+		sign_up_and_in
 		click_link 'Add a restaurant'
 		fill_in 'Name', with: 'KFC'
 		click_button 'Create Restaurant'
@@ -33,6 +34,7 @@ feature 'restaurants' do
 		context 'an invalid restaurant' do
 			it 'does not let you submit an incompleted form' do
 				visit '/restaurants'
+				sign_up_and_in
 				click_link 'Add a restaurant'
 		    fill_in 'Name', with: 'KF'
 		    click_button 'Create Restaurant'
@@ -56,6 +58,7 @@ feature 'restaurants' do
 		let!(:kfc){Restaurant.create(name:'KFC')}
 		scenario 'user can edit existing restaurant' do
 			visit '/restaurants'
+			sign_up_and_in
 			click_link 'Edit'
 			fill_in 'Name', with: 'Maccas'
 			click_button 'Update Restaurant'
@@ -67,6 +70,7 @@ feature 'restaurants' do
 		before {Restaurant.create name: 'KFC'}
 		scenario 'user can delete a restaurant' do
 			visit '/restaurants'
+			sign_up_and_in
 			click_link 'Delete KFC'
 			expect(page).not_to have_content 'KFC'
 			expect(page).to have_content "Restaurant deleted"
